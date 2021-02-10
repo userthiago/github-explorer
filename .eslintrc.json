@@ -24,6 +24,11 @@
         "prettier",
         "@typescript-eslint"
     ],
+    "settings": {
+      "import/resolver": {
+        "typescript": {}
+      }
+    },
     "rules": {
       "react-hooks/rules-of-hooks": "error",
       "react-hooks/exhaustive-deps": "warn",
@@ -40,9 +45,6 @@
         "error"
       ],
       "react/react-in-jsx-scope": "off",
-      "import/resolver": {
-        "typescript": {}
-      },
       "import/extensions": [
         "error",
         "ignorePackages",
