@@ -1,6 +1,7 @@
 import { createGlobalStyle } from 'styled-components';
 
 import githubBackground from '../assets/imgs/github-background.svg';
+import { FONT_SIZE } from '../helpers/varUtils';
 
 export default createGlobalStyle`
   * {
@@ -17,7 +18,7 @@ export default createGlobalStyle`
   }
 
   body, input, button {
-    font: 16px Robot, sans-serif;
+    font: ${FONT_SIZE}px Roboto, sans-serif;
   }
 
   #root {
