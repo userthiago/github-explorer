@@ -5,6 +5,7 @@
     },
     "extends": [
         "plugin:react/recommended",
+        "plugin:@typescript-eslint/eslint-recommended",
         "plugin:@typescript-eslint/recommended",
         "plugin:prettier/recommended",
         "prettier/@typescript-eslint",
@@ -38,6 +39,10 @@
       "arrow-body-style": "off",
       "camelcase": "off",
       "react/prop-types": "off",
+      "no-unused-vars": "off",
+      "@typescript-eslint/no-unused-vars": [
+        "error"
+      ],
       "@typescript-eslint/explicit-function-return-type": [
         "error",
         {

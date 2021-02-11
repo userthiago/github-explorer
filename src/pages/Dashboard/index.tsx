@@ -3,11 +3,11 @@ import React, { useState, FormEvent } from 'react';
 import RepositoryCard from '../../components/RepositoryCard';
 import logoImg from '../../assets/imgs/github_explorer-logo.svg';
 
-// import api from '../../services/api';
+import api from '../../services/api';
 
 // eslint-disable-next-line object-curly-newline
-import { Title, Form, Input, Button, RepositoriesList } from './styles';
-import api from '../../services/api';
+import { Title, Form, RepositoriesList } from './styles';
+import Input from '../../components/Input';
 
 interface RepositoryData {
   full_name: string;
@@ -19,19 +19,36 @@ interface RepositoryData {
 }
 
 const Dashboard: React.FC = () => {
-  const [newRepo, setNewRepo] = useState('');
+  const [inputValue, setInputValue] = useState('');
+  const [inputError, setInputError] = useState('');
   const [repositories, setRepositories] = useState<RepositoryData[]>([]);
+
+  const handleSetInputValue = (value: string): void => {
+    setInputValue(value);
+  };
 
   async function handleAddRepository(
     e: FormEvent<HTMLFormElement>,
   ): Promise<void> {
     e.preventDefault();
 
-    await api.get<RepositoryData>(`repos/${newRepo}`).then((response) => {
-      const repository = response.data;
-      setRepositories([...repositories, repository]);
-      setNewRepo('');
-    });
+    if (!inputValue) {
+      setInputError('Digite o autor/nome do repositório');
+    } else {
+      await api
+        .get<RepositoryData>(`repos/${inputValue}`)
+        .then((response) => {
+          const repository = response.data;
+          setRepositories([...repositories, repository]);
+          setInputValue('');
+          setInputError('');
+        })
+        .catch(() => {
+          setInputError('Erro na busca por esse repositório');
+        });
+
+      console.log(inputError);
+    }
   }
 
   return (
@@ -41,11 +58,13 @@ const Dashboard: React.FC = () => {
 
       <Form onSubmit={handleAddRepository}>
         <Input
+          value={inputValue}
           placeholder="Digite o nome do repositório"
-          value={newRepo}
-          onChange={(e) => setNewRepo(e.target.value)}
+          buttonValue="Pesquisar"
+          buttonType="submit"
+          functionSetValue={handleSetInputValue}
+          errorMessage={inputError}
         />
-        <Button type="submit">Pesquisar</Button>
       </Form>
 
       <RepositoriesList>
