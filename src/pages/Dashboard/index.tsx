@@ -1,5 +1,5 @@
 /* eslint-disable implicit-arrow-linebreak */
-import React, { useState, FormEvent } from 'react';
+import React, { useState, FormEvent, useEffect } from 'react';
 
 import RepositoryCard from '../../components/RepositoryCard';
 import logoImg from '../../assets/imgs/github_explorer-logo.svg';
@@ -22,7 +22,24 @@ interface RepositoryData {
 const Dashboard: React.FC = () => {
   const [inputValue, setInputValue] = useState('');
   const [inputError, setInputError] = useState('');
-  const [repositories, setRepositories] = useState<RepositoryData[]>([]);
+  const [repositories, setRepositories] = useState<RepositoryData[]>(() => {
+    const storagedRepositories = localStorage.getItem(
+      '@GithubExplorer:repositories',
+    );
+
+    if (storagedRepositories) {
+      return JSON.parse(storagedRepositories);
+    }
+
+    return [];
+  });
+
+  useEffect(() => {
+    localStorage.setItem(
+      '@GithubExplorer:repositories',
+      JSON.stringify(repositories),
+    );
+  }, [repositories]);
 
   const handleSetInputValue = (value: string): void => {
     setInputValue(value);
