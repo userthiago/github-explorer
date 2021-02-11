@@ -20,49 +20,23 @@ export const Container = styled.div`
       color: #c53030;
       font-size: ${pixelToRem(16)};
     }
-
-    &--error {
-      input {
-        border: solid #c53030;
-        border-width: 1px 0 1px 1px;
-
-        color: #c53030;
-
-        &::placeholder {
-          color: #c53030;
-        }
-
-        &:focus {
-          color: #3a3a3a;
-
-          &::placeholder {
-            color: #a8a8b3;
-          }
-        }
-      }
-
-      button {
-        background: #c53030;
-
-        &:hover {
-          background: ${shade(0.2, '#c53030')};
-        }
-      }
-    }
   }
 
   input {
+    flex: 1;
+
     background: #ffffff;
     height: 72px;
     padding: 0 30px;
-    border: 0;
+    border: 2px solid #ffffff;
     border-radius: 5px 0 0 5px;
-    flex: 1;
 
     color: #3a3a3a;
     font-size: ${pixelToRem(20)};
     font-weight: 400;
     line-height: 1.15;
+
+    transition: border 0.2s;
 
     &::placeholder {
       color: #a8a8b3;
@@ -84,6 +58,35 @@ export const Container = styled.div`
 
     &:hover {
       background: ${shade(0.2, '#04d361')};
+    }
+  }
+
+  // Modificadores do input field
+  .inputField--error {
+    input {
+      border: 2px solid #c53030;
+
+      color: #c53030;
+
+      &::placeholder {
+        color: #c53030;
+      }
+
+      &:focus {
+        color: #3a3a3a;
+
+        &::placeholder {
+          color: #a8a8b3;
+        }
+      }
+    }
+
+    button {
+      background: #c53030;
+
+      &:hover {
+        background: ${shade(0.2, '#c53030')};
+      }
     }
   }
 `;

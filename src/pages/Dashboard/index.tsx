@@ -7,7 +7,7 @@ import api from '../../services/api';
 
 // eslint-disable-next-line object-curly-newline
 import { Title, Form, RepositoriesList } from './styles';
-import Input from '../../components/Input';
+import InputField from '../../components/InputField';
 
 interface RepositoryData {
   full_name: string;
@@ -46,8 +46,6 @@ const Dashboard: React.FC = () => {
         .catch(() => {
           setInputError('Erro na busca por esse repositório');
         });
-
-      console.log(inputError);
     }
   }
 
@@ -57,7 +55,7 @@ const Dashboard: React.FC = () => {
       <Title>Explore repositórios no Github.</Title>
 
       <Form onSubmit={handleAddRepository}>
-        <Input
+        <InputField
           value={inputValue}
           placeholder="Digite o nome do repositório"
           buttonValue="Pesquisar"
