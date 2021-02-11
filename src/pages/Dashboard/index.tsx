@@ -1,3 +1,4 @@
+/* eslint-disable implicit-arrow-linebreak */
 import React, { useState, FormEvent } from 'react';
 
 import RepositoryCard from '../../components/RepositoryCard';
@@ -34,6 +35,13 @@ const Dashboard: React.FC = () => {
 
     if (!inputValue) {
       setInputError('Digite o autor/nome do repositório');
+    } else if (
+      repositories.some(
+        (repository) =>
+          repository.full_name.toUpperCase() === inputValue.toUpperCase(),
+      )
+    ) {
+      setInputError('O repositório já está na lista');
     } else {
       await api
         .get<RepositoryData>(`repos/${inputValue}`)
