@@ -4,16 +4,28 @@ import arrowRight from '../../assets/imgs/arrow-right.svg';
 
 import { Container } from './styles';
 
-const RepositoryCard: React.FC = () => (
+interface RepositoryCardData {
+  userName: string;
+  userProfileImgUrl: string;
+  repositoryName: string;
+  repositoryDescription: string;
+}
+
+const RepositoryCard: React.FC<RepositoryCardData> = ({
+  userName,
+  userProfileImgUrl,
+  repositoryName,
+  repositoryDescription,
+}) => (
   <Container>
     <img
       className="repository-card__img-profile"
-      src="https://avatars.githubusercontent.com/u/37296704?s=460&u=de99263ba5b63909fecb12d6c9d1dc1fcb405216&v=4"
-      alt="Imagem do perfil de Thiago Santos"
+      src={userProfileImgUrl}
+      alt={`Imagem do perfil de ${userName}`}
     />
     <div className="repository-card__info">
-      <strong>github_explorer</strong>
-      <p>Repositório sobre a aula de ReactJS/Styled Components/Typescript</p>
+      <strong>{repositoryName}</strong>
+      <p>{repositoryDescription}</p>
     </div>
     <img
       className="repository-card__icon"
