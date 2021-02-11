@@ -6,7 +6,7 @@ export const Title = styled.h1`
   max-width: 433px;
   margin-top: 100px;
 
-  font-size: ${pixelToRem(48)}rem;
+  font-size: ${pixelToRem(48)};
   color: #3a3a3a;
   line-height: 1.16;
 `;
@@ -27,7 +27,7 @@ export const Input = styled.input`
   flex: 1;
 
   color: #3a3a3a;
-  font-size: ${pixelToRem(20)}rem;
+  font-size: ${pixelToRem(20)};
   font-weight: 400;
   line-height: 1.15;
 
@@ -44,7 +44,7 @@ export const Button = styled.button`
   border-radius: 0 5px 5px 0;
 
   color: #ffffff;
-  font-size: ${pixelToRem(18)}rem;
+  font-size: ${pixelToRem(18)};
   font-weight: bold;
 
   transition: background-color 0.2s;
@@ -52,4 +52,8 @@ export const Button = styled.button`
   &:hover {
     background: ${shade(0.2, '#04d361')};
   }
+`;
+
+export const RepositoriesList = styled.div`
+  margin-top: 120px;
 `;

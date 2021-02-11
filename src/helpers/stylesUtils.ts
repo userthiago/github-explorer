@@ -1,5 +1,8 @@
+/* eslint-disable implicit-arrow-linebreak */
 import { FONT_SIZE } from './varUtils';
 
 export const pixelToRem = (size: number): string =>
-  // eslint-disable-next-line implicit-arrow-linebreak
-  (size / FONT_SIZE).toFixed(2);
+  `${(size / FONT_SIZE).toFixed(2)}rem`;
+
+export const calcLineHeight = (lineHeight: number, fontSize: number): string =>
+  (lineHeight / fontSize).toFixed(3);
