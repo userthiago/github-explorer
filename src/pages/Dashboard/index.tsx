@@ -2,13 +2,12 @@
 import React, { useState, FormEvent, useEffect } from 'react';
 
 import RepositoryCard from '../../components/RepositoryCard';
-import logoImg from '../../assets/imgs/github_explorer-logo.svg';
+import InputField from '../../components/InputField';
+import Header from '../../components/Header';
 
 import api from '../../services/api';
 
-// eslint-disable-next-line object-curly-newline
 import { Title, Form, RepositoriesList } from './styles';
-import InputField from '../../components/InputField';
 
 interface RepositoryData {
   full_name: string;
@@ -76,7 +75,7 @@ const Dashboard: React.FC = () => {
 
   return (
     <>
-      <img src={logoImg} alt="Github Explorer" />
+      <Header />
       <Title>Explore repositórios no Github.</Title>
 
       <Form onSubmit={handleAddRepository}>
@@ -99,6 +98,7 @@ const Dashboard: React.FC = () => {
               repositoryDescription={repository.description}
               userName={repository.owner.login}
               userProfileImgUrl={repository.owner.avatar_url}
+              url={`/repository/${repository.full_name}`}
             />
           );
         })}

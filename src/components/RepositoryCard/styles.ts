@@ -1,8 +1,9 @@
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 import { shade } from 'polished';
 import { calcLineHeight, pixelToRem } from '../../helpers/stylesUtils';
 
-export const Container = styled.a`
+export const Container = styled(Link)`
   display: flex;
   align-items: center;
 

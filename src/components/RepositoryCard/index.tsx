@@ -1,6 +1,6 @@
 import React from 'react';
 
-import arrowRight from '../../assets/imgs/arrow-right.svg';
+import arrowRight from '../../assets/icons/arrow-right.svg';
 
 import { Container } from './styles';
 
@@ -9,6 +9,7 @@ interface RepositoryCardData {
   userProfileImgUrl: string;
   repositoryName: string;
   repositoryDescription: string;
+  url: string;
 }
 
 const RepositoryCard: React.FC<RepositoryCardData> = ({
@@ -16,8 +17,9 @@ const RepositoryCard: React.FC<RepositoryCardData> = ({
   userProfileImgUrl,
   repositoryName,
   repositoryDescription,
+  url,
 }) => (
-  <Container>
+  <Container to={url}>
     <img
       className="repository-card__img-profile"
       src={userProfileImgUrl}

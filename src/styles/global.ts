@@ -30,4 +30,8 @@ export default createGlobalStyle`
   button, a {
     cursor: pointer;
   }
+
+  a {
+    text-decoration: none;
+  }
 `;
