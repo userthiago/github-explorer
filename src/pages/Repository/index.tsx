@@ -1,64 +1,97 @@
-import React from 'react';
-// import { useRouteMatch } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { useRouteMatch } from 'react-router-dom';
+
+import api from '../../services/api';
 
 import Header from '../../components/Header';
 import RepositoryCard from '../../components/RepositoryCard';
 
 import { UserInfo, RepositoryInfo, RepositoryIssuesList } from './styles';
 
-// interface RepositoryParams {
-//   repository: string;
-// }
+interface RepositoryParams {
+  repository: string;
+}
+
+interface RepositoryData {
+  full_name: string;
+  description: string;
+  stargazers_count: number;
+  forks_count: number;
+  open_issues_count: number;
+  owner: {
+    login: string;
+    avatar_url: string;
+  };
+}
+
+interface Issue {
+  id: number;
+  title: string;
+  html_url: string;
+  user: {
+    login: string;
+  };
+}
 
 const Repository: React.FC = () => {
-  // const { params } = useRouteMatch<RepositoryParams>();
+  const { params } = useRouteMatch<RepositoryParams>();
+  const [repository, setRepository] = useState<RepositoryData | null>(null);
+  const [issues, setIssues] = useState<Issue[]>([]);
+
+  useEffect(() => {
+    api.get(`repos/${params.repository}`).then((response) => {
+      setRepository(response.data);
+    });
+    api.get(`repos/${params.repository}/issues`).then((response) => {
+      setIssues(response.data);
+    });
+  }, [params.repository]);
 
   return (
     <>
       <Header enableReturn />
-      <UserInfo>
-        <img
-          src="https://avatars.githubusercontent.com/u/37296704?s=460&u=de99263ba5b63909fecb12d6c9d1dc1fcb405216&v=4"
-          alt="Imagem do perfil"
-        />
-        <div className="user__info">
-          <strong>thiagosantos/repo</strong>
-          <p>Descrição do repo</p>
-        </div>
-      </UserInfo>
-      <RepositoryInfo>
-        <div className="info__number">
-          <strong>1808</strong>
-          <p>Stars</p>
-        </div>
-        <div className="info__number">
-          <strong>48</strong>
-          <p>Fork</p>
-        </div>
-        <div className="info__number">
-          <strong>67</strong>
-          <p>Issues abertas</p>
-        </div>
-      </RepositoryInfo>
+      {repository && (
+        <>
+          <UserInfo>
+            <img
+              src={repository.owner.avatar_url}
+              alt={`Imagem do perfil de ${repository.owner.login}`}
+            />
+            <div className="user__info">
+              <strong>{repository.full_name}</strong>
+              <p>{repository.description}</p>
+            </div>
+          </UserInfo>
+          <RepositoryInfo>
+            <li>
+              <strong>{repository.stargazers_count}</strong>
+              <p>Stars</p>
+            </li>
+            <li>
+              <strong>{repository.forks_count}</strong>
+              <p>Fork</p>
+            </li>
+            <li>
+              <strong>{repository.open_issues_count}</strong>
+              <p>Issues abertas</p>
+            </li>
+          </RepositoryInfo>
+        </>
+      )}
       <RepositoryIssuesList>
-        <RepositoryCard
-          repositoryName="Teste"
-          repositoryDescription="Teste"
-          userName="Teste"
-          url="/"
-        />
-        <RepositoryCard
-          repositoryName="Teste"
-          repositoryDescription="Teste"
-          userName="Teste"
-          url="/"
-        />
-        <RepositoryCard
-          repositoryName="Teste"
-          repositoryDescription="Teste"
-          userName="Teste"
-          url="/"
-        />
+        {issues.map((issue) => {
+          return (
+            <RepositoryCard
+              key={issue.id}
+              repositoryName={issue.title}
+              repositoryDescription={issue.user.login}
+              url={{
+                pathname: issue.html_url,
+              }}
+              target="_blank"
+            />
+          );
+        })}
       </RepositoryIssuesList>
     </>
   );

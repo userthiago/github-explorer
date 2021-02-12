@@ -31,16 +31,18 @@ export const UserInfo = styled.div`
   }
 `;
 
-export const RepositoryInfo = styled.div`
+export const RepositoryInfo = styled.ul`
   margin-top: 50px;
   display: flex;
 
-  .info__number {
+  li {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
 
-    & + .info__number {
+    list-style: none;
+
+    & + li {
       margin-left: 80px;
     }
 
