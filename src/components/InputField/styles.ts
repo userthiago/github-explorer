@@ -1,7 +1,17 @@
-import styled from 'styled-components';
-import { shade } from 'polished';
+import styled, { keyframes } from 'styled-components';
+import { shade, lighten } from 'polished';
 
 import { pixelToRem } from '../../helpers/stylesUtils';
+
+const rotate = keyframes`
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+`;
 
 export const Container = styled.div`
   display: flex;
@@ -38,12 +48,21 @@ export const Container = styled.div`
 
     transition: border 0.2s;
 
+    &:disabled {
+      color: ${lighten(0.5, '#3a3a3a')};
+      cursor: not-allowed;
+    }
+
     &::placeholder {
       color: #a8a8b3;
     }
   }
 
   button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
     background: #04d361;
     height: 72px;
     width: 210px;
@@ -58,6 +77,15 @@ export const Container = styled.div`
 
     &:hover {
       background: ${shade(0.2, '#04d361')};
+    }
+
+    &:disabled {
+      background: ${lighten(0.2, '#04d361')};
+      cursor: not-allowed;
+    }
+
+    .loading {
+      animation: ${rotate} 1s linear infinite;
     }
   }
 

@@ -1,23 +1,24 @@
 import React from 'react';
 
+import { FaCircleNotch } from 'react-icons/fa';
 import { Container } from './styles';
 
 interface InputData {
   value: string;
   placeholder: string;
   buttonValue: string;
-  buttonType?: 'button' | 'submit';
   functionSetValue: (value: string) => void;
   errorMessage: string;
+  loading: boolean;
 }
 
 const InputField: React.FC<InputData> = ({
   value,
   placeholder,
   buttonValue,
-  buttonType = 'button',
   functionSetValue,
   errorMessage,
+  loading,
 }) => {
   return (
     <Container>
@@ -28,13 +29,15 @@ const InputField: React.FC<InputData> = ({
           placeholder={placeholder}
           value={value}
           onChange={(e) => functionSetValue(e.target.value)}
+          disabled={loading}
         />
-        {buttonType === 'button' && (
-          <button type="button">{buttonValue}</button>
-        )}
-        {buttonType === 'submit' && (
-          <button type="submit">{buttonValue}</button>
-        )}
+        <button type="submit" disabled={loading}>
+          {loading ? (
+            <FaCircleNotch className="loading" size={20} />
+          ) : (
+            buttonValue
+          )}
+        </button>
       </div>
       {errorMessage && (
         <span className="inputField__error">{errorMessage}</span>

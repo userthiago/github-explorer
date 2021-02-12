@@ -32,6 +32,7 @@ const Dashboard: React.FC = () => {
 
     return [];
   });
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     localStorage.setItem(
@@ -59,6 +60,7 @@ const Dashboard: React.FC = () => {
     ) {
       setInputError('O repositório já está na lista');
     } else {
+      setLoading(true);
       await api
         .get<RepositoryData>(`repos/${inputValue}`)
         .then((response) => {
@@ -69,6 +71,9 @@ const Dashboard: React.FC = () => {
         })
         .catch(() => {
           setInputError('Erro na busca por esse repositório');
+        })
+        .finally(() => {
+          setLoading(false);
         });
     }
   }
@@ -83,7 +88,7 @@ const Dashboard: React.FC = () => {
           value={inputValue}
           placeholder="Digite o nome do repositório"
           buttonValue="Pesquisar"
-          buttonType="submit"
+          loading={loading}
           functionSetValue={handleSetInputValue}
           errorMessage={inputError}
         />
