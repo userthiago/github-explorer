@@ -1,6 +1,6 @@
 import React from 'react';
 
-import arrowRight from '../../assets/icons/arrow-right.svg';
+import { FiChevronRight } from 'react-icons/fi';
 
 import { Container } from './styles';
 
@@ -29,11 +29,7 @@ const RepositoryCard: React.FC<RepositoryCardData> = ({
       <strong>{repositoryName}</strong>
       <p>{repositoryDescription}</p>
     </div>
-    <img
-      className="repository-card__icon"
-      src={arrowRight}
-      alt="Flecha para a direita"
-    />
+    <FiChevronRight className="repository-card__icon" size={24} />
   </Container>
 );
 

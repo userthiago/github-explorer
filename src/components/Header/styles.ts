@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { Link as LinkRouter } from 'react-router-dom';
+
 import { calcLineHeight, pixelToRem } from '../../helpers/stylesUtils';
 
 export const Container = styled.header`
@@ -17,7 +18,13 @@ export const Link = styled(LinkRouter)`
   line-height: ${calcLineHeight(18.75, 16)};
   font-weight: 700;
 
-  img {
-    margin-right: 12px;
+  transition: color 0.2s;
+
+  svg {
+    margin-right: 6px;
+  }
+
+  &:hover {
+    color: #666;
   }
 `;

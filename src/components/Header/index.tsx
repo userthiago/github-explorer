@@ -1,7 +1,7 @@
 import React from 'react';
+import { FiChevronLeft } from 'react-icons/fi';
 
 import logoImg from '../../assets/imgs/github_explorer-logo.svg';
-import arrowLeft from '../../assets/icons/arrow-left.svg';
 
 import { Container, Link } from './styles';
 
@@ -19,7 +19,7 @@ const Header: React.FC<HeaderData> = ({
       <img src={logoImg} alt="Github Explorer" />
       {enableReturn && (
         <Link to={returnLink}>
-          <img src={arrowLeft} alt="Voltar" /> Voltar
+          <FiChevronLeft size={16} /> Voltar
         </Link>
       )}
     </Container>

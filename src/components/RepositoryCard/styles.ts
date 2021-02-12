@@ -51,9 +51,9 @@ export const Container = styled(Link)`
     }
 
     &__icon {
-      margin: 0 16px;
+      margin: 0 8px 0 16px;
 
-      font-size: ${pixelToRem(10)};
+      color: #c9c9d4;
     }
   }
 `;
