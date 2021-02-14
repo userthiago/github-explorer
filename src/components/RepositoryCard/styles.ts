@@ -25,8 +25,8 @@ const load = keyframes`
 
 interface CardData {
   position: number;
-  enableRemove?: boolean;
-  willBeRemove?: boolean;
+  $enableRemove?: boolean;
+  $willBeRemove?: boolean;
 }
 
 export const Container = styled(Link)<CardData>`
@@ -47,8 +47,8 @@ export const Container = styled(Link)<CardData>`
     margin-top: 16px;
   }
 
-  ${({ enableRemove }) =>
-    !enableRemove &&
+  ${({ $enableRemove }) =>
+    !$enableRemove &&
     css`
       &:hover {
         background-color: ${shade(0.02, '#ffffff')};
@@ -91,8 +91,8 @@ export const Container = styled(Link)<CardData>`
     }
   }
 
-  ${({ enableRemove, willBeRemove }) => {
-    if (enableRemove && willBeRemove) {
+  ${({ $enableRemove, $willBeRemove }) => {
+    if ($enableRemove && $willBeRemove) {
       return css`
         background-color: ${lighten(0.4, '#c53030')};
         border: solid 2px #c53030;
@@ -116,7 +116,7 @@ export const Container = styled(Link)<CardData>`
       `;
     }
 
-    if (enableRemove) {
+    if ($enableRemove) {
       return css`
         opacity: 0.5;
       `;

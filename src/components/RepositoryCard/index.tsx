@@ -50,8 +50,8 @@ const RepositoryCard: React.FC<RepositoryCardData> = ({
       to={url}
       target={target}
       position={position}
-      enableRemove={enableRemove}
-      willBeRemove={willBeRemove}
+      $enableRemove={enableRemove}
+      $willBeRemove={willBeRemove}
       onClick={handleRemove}
     >
       {userProfileImgUrl && (
