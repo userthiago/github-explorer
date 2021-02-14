@@ -18,5 +18,29 @@ export const Form = styled.form`
 `;
 
 export const RepositoriesList = styled.div`
+  margin-top: 16px;
+`;
+
+interface RepositoryMenuData {
+  enable: boolean;
+}
+
+export const RepositoryMenu = styled.div<RepositoryMenuData>`
+  display: flex;
+  justify-content: space-between;
+
   margin-top: 120px;
+
+  .remove {
+    &__change-area {
+      visibility: ${({ enable }) => (enable ? 'visible' : 'hidden')};
+
+      span {
+        margin-left: 16px;
+
+        color: #3a3a3a;
+        font-weight: 500;
+      }
+    }
+  }
 `;

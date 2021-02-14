@@ -79,7 +79,7 @@ const Repository: React.FC = () => {
         </>
       )}
       <RepositoryIssuesList>
-        {issues.map((issue) => {
+        {issues.map((issue, index) => {
           return (
             <RepositoryCard
               key={issue.id}
@@ -89,6 +89,7 @@ const Repository: React.FC = () => {
                 pathname: issue.html_url,
               }}
               target="_blank"
+              position={index}
             />
           );
         })}
