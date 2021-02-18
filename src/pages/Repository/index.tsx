@@ -6,7 +6,7 @@ import api from '../../services/api';
 import Header from '../../components/Header';
 import RepositoryCard from '../../components/RepositoryCard';
 
-import { UserInfo, RepositoryInfo, RepositoryIssuesList } from './styles';
+import * as S from './styles';
 
 interface RepositoryParams {
   repository: string;
@@ -52,7 +52,7 @@ const Repository: React.FC = () => {
       <Header enableReturn />
       {repository && (
         <>
-          <UserInfo>
+          <S.UserInfo>
             <img
               src={repository.owner.avatar_url}
               alt={`Imagem do perfil de ${repository.owner.login}`}
@@ -61,8 +61,8 @@ const Repository: React.FC = () => {
               <strong>{repository.full_name}</strong>
               <p>{repository.description}</p>
             </div>
-          </UserInfo>
-          <RepositoryInfo>
+          </S.UserInfo>
+          <S.RepositoryInfo>
             <li>
               <strong>{repository.stargazers_count}</strong>
               <p>Stars</p>
@@ -75,10 +75,10 @@ const Repository: React.FC = () => {
               <strong>{repository.open_issues_count}</strong>
               <p>Issues abertas</p>
             </li>
-          </RepositoryInfo>
+          </S.RepositoryInfo>
         </>
       )}
-      <RepositoryIssuesList>
+      <S.RepositoryIssuesList>
         {issues.map((issue, index) => {
           return (
             <RepositoryCard
@@ -93,7 +93,7 @@ const Repository: React.FC = () => {
             />
           );
         })}
-      </RepositoryIssuesList>
+      </S.RepositoryIssuesList>
     </>
   );
 };

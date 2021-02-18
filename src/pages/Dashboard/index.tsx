@@ -8,7 +8,7 @@ import Header from '../../components/Header';
 
 import api from '../../services/api';
 
-import { Title, Form, RepositoriesList, RepositoryMenu } from './styles';
+import * as S from './styles';
 
 import Checkbox from '../../components/Checkbox';
 import Button from '../../components/Button';
@@ -23,9 +23,9 @@ interface RepositoryData {
 }
 
 const Dashboard: React.FC = () => {
+  const [loading, setLoading] = useState(false);
   const [inputValue, setInputValue] = useState('');
   const [inputError, setInputError] = useState('');
-  const [removeRepository, setRemoveRepository] = useState(false);
   const [repositories, setRepositories] = useState<RepositoryData[]>(() => {
     const storagedRepositories = localStorage.getItem(
       '@GithubExplorer:repositories',
@@ -37,11 +37,14 @@ const Dashboard: React.FC = () => {
 
     return [];
   });
+  const [removeRepository, setRemoveRepository] = useState(false);
   const [removeListRepository, setRemoveListRepository] = useState<number[]>(
     [],
   );
-  const [selectedRepositories, setSelectedRepositories] = useState(0);
-  const [loading, setLoading] = useState(false);
+  const [
+    selectedRepositoriesForRemove,
+    setSelectedRepositoriesForRemove,
+  ] = useState(0);
 
   useEffect(() => {
     localStorage.setItem(
@@ -57,7 +60,7 @@ const Dashboard: React.FC = () => {
   const handleSetRemoveRepository = (): void => {
     if (removeRepository) {
       setRemoveRepository(false);
-      setSelectedRepositories(0);
+      setSelectedRepositoriesForRemove(0);
       setRemoveListRepository([]);
     } else {
       setRemoveRepository(true);
@@ -75,7 +78,7 @@ const Dashboard: React.FC = () => {
       });
       setRepositories(newListRepositories);
     }
-    setSelectedRepositories(0);
+    setSelectedRepositoriesForRemove(0);
     setRemoveListRepository([]);
   };
 
@@ -83,10 +86,10 @@ const Dashboard: React.FC = () => {
     const list = removeListRepository;
     if (list.some((item) => item === index)) {
       list.splice(list.indexOf(index), 1);
-      setSelectedRepositories(selectedRepositories - 1);
+      setSelectedRepositoriesForRemove(selectedRepositoriesForRemove - 1);
     } else {
       list.push(index);
-      setSelectedRepositories(selectedRepositories + 1);
+      setSelectedRepositoriesForRemove(selectedRepositoriesForRemove + 1);
     }
     setRemoveListRepository(list);
   };
@@ -127,8 +130,8 @@ const Dashboard: React.FC = () => {
   return (
     <>
       <Header />
-      <Title>Explore repositórios no Github.</Title>
-      <Form onSubmit={handleAddRepository}>
+      <S.Title>Explore repositórios no Github.</S.Title>
+      <S.Form onSubmit={handleAddRepository}>
         <InputField
           value={inputValue}
           placeholder="Digite o nome do repositório"
@@ -137,15 +140,17 @@ const Dashboard: React.FC = () => {
           functionSetValue={handleSetInputValue}
           errorMessage={inputError}
         />
-      </Form>
-      <RepositoryMenu enable={removeRepository}>
+      </S.Form>
+      <S.RepositoryMenu enable={removeRepository}>
         {repositories.length > 0 && (
           <>
             <div className="remove__change-area">
               <Button onClick={handleRemoveRepositoriesFromList}>
                 Remover
               </Button>
-              <span>{selectedRepositories} repositório(s) selecionado(s)</span>
+              <span>
+                {selectedRepositoriesForRemove} repositório(s) selecionado(s)
+              </span>
             </div>
             <Checkbox
               checked={removeRepository}
@@ -155,8 +160,8 @@ const Dashboard: React.FC = () => {
             </Checkbox>
           </>
         )}
-      </RepositoryMenu>
-      <RepositoriesList>
+      </S.RepositoryMenu>
+      <S.RepositoriesList>
         {repositories.map((repository, index) => {
           return (
             <RepositoryCard
@@ -172,7 +177,7 @@ const Dashboard: React.FC = () => {
             />
           );
         })}
-      </RepositoriesList>
+      </S.RepositoriesList>
     </>
   );
 };
