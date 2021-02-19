@@ -42,7 +42,7 @@ export const Container = styled.div`
     border-radius: 5px 0 0 5px;
 
     color: #3a3a3a;
-    font-size: ${pixelToRem(20)};
+    font-size: ${pixelToRem(16)};
     font-weight: 400;
     line-height: 1.15;
 
@@ -55,6 +55,12 @@ export const Container = styled.div`
 
     &::placeholder {
       color: #a8a8b3;
+    }
+
+    @media only screen and (max-width: 560px) {
+      height: 56px;
+      width: 100%;
+      padding: 0 16px;
     }
   }
 
@@ -84,8 +90,23 @@ export const Container = styled.div`
       cursor: not-allowed;
     }
 
+    span {
+      margin-left: 8px;
+    }
+
     .loading {
       animation: ${rotate} 1s linear infinite;
+    }
+
+    @media only screen and (max-width: 560px) {
+      flex-shrink: 0;
+
+      height: 56px;
+      width: 56px;
+
+      span {
+        display: none;
+      }
     }
   }
 

@@ -134,7 +134,7 @@ const Dashboard: React.FC = () => {
       <S.Form onSubmit={handleAddRepository}>
         <InputField
           value={inputValue}
-          placeholder="Digite o nome do repositório"
+          placeholder="Digite usuário/repositório"
           buttonValue="Pesquisar"
           loading={loading}
           functionSetValue={handleSetInputValue}
@@ -148,9 +148,7 @@ const Dashboard: React.FC = () => {
               <Button onClick={handleRemoveRepositoriesFromList}>
                 Remover
               </Button>
-              <span>
-                {selectedRepositoriesForRemove} repositório(s) selecionado(s)
-              </span>
+              <span>{selectedRepositoriesForRemove} repositório(s)</span>
             </div>
             <Checkbox
               checked={removeRepository}

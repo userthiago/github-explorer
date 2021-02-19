@@ -43,6 +43,10 @@ export const Container = styled(Link)<CardData>`
   transition: 0.2s;
   animation: ${load} 0.4s linear;
 
+  @media only screen and (max-width: 560px) {
+    height: 96px;
+  }
+
   & + & {
     margin-top: 16px;
   }
@@ -62,6 +66,11 @@ export const Container = styled(Link)<CardData>`
       height: 84px;
       width: 84px;
       border-radius: 50%;
+
+      @media only screen and (max-width: 560px) {
+        height: 64px;
+        width: 64px;
+      }
     }
 
     &__info {
@@ -82,9 +91,21 @@ export const Container = styled(Link)<CardData>`
         font-size: ${pixelToRem(18)};
         line-height: ${calcLineHeight(21, 18)};
       }
+
+      @media only screen and (max-width: 560px) {
+        strong {
+          font-size: ${pixelToRem(18)};
+        }
+
+        p {
+          display: none;
+        }
+      }
     }
 
     &__icon {
+      flex-shrink: 0;
+
       margin: 0 8px 0 16px;
 
       color: #c9c9d4;

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { FaCircleNotch } from 'react-icons/fa';
+import { FaCircleNotch, FaSearch } from 'react-icons/fa';
 import { Container } from './styles';
 
 interface InputData {
@@ -35,7 +35,10 @@ const InputField: React.FC<InputData> = ({
           {loading ? (
             <FaCircleNotch className="loading" size={20} />
           ) : (
-            buttonValue
+            <>
+              <FaSearch />
+              <span>{buttonValue}</span>
+            </>
           )}
         </button>
       </div>
